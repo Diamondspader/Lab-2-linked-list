@@ -19,8 +19,19 @@ TEST_CASE ("Default constructor")
 {
     Sorted_List empty_list;
     Sorted_List linked_list{2,5,7};
-    CHECK(linked_list.get_value() == 12);
-    
+    empty_list.Insert(5);
+    empty_list.Insert(2);
+    CHECK(empty_list.get_value() == 100);
+    empty_list.Insert(6);
+    CHECK(empty_list.get_value() == 90);
+    empty_list.Insert(3);
+    CHECK(empty_list.get_value() == 80);
+    empty_list.Insert(4);
+    CHECK(empty_list.get_value() == 70);
+    empty_list.Insert(7);
+    CHECK(empty_list.get_value() == 60);
+    //CHECK(linked_list.get_value() == 12);
+
 
 }
 
