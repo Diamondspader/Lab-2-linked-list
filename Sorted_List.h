@@ -13,29 +13,27 @@
 class Sorted_List
 {
 public:
-  void Insert(int x);
-  void Delete(int key);
   Sorted_List();
-  Sorted_List(int x, int y, int z);
-  int get_value(){return val;};
-  std::vector<int> printList;
-  void printall();
+
+
+  void Insert(int x);
+  void print();
+  int get_val(){return val;};
 
 private:
 
   class Element
   {
   public:
-    Element(Element* prev, Element* next, int val):
-            previous{prev}, next{next}, value{val}{}
-
+    Element(Element* prev, Element* next, int value):
+            previous{prev}, next{next}, value{value}{};
     Element* previous{nullptr};
     Element* next{nullptr};
     int value{};
   };
 
-  Element* first{};
-  Element* last{};
+  Element* first{nullptr};
+  Element* last{nullptr};
   int val{};
 
 };

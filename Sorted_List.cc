@@ -1,71 +1,62 @@
 # include "Sorted_List.h"
-#include <vector>
+#include <iostream>
 Sorted_List::Sorted_List():
        first{nullptr}, last{nullptr}
 {
 }
 
-Sorted_List::Sorted_List(int x, int y, int z):
-       first{nullptr}, last{nullptr}, val{}
-{
-  Insert(x);
-  val = first->value;
-}
 
 void Sorted_List::Insert(int x)
 {
+  Element* newElem = new Element{nullptr, nullptr, x};
   Element* temp{first};
-  if(first == last)
+  if(first == nullptr)
   {
-    first = new Element{first, last, x};
+    first = newElem;
+    //delete newElem;
     return;
   }
-
-  if(x < temp->value && temp->previous == nullptr)
+  //insert at front
+  if(x < first->value && first->previous == nullptr)
   {
-    first = new Element{nullptr, temp, x};
-    temp->previous = first;
+    first->previous = newElem;
+    newElem->next = first;
+    first = newElem;
+    //delete newElem;
     return;
   }
-  do{
+  //insert at the end
+  while(temp != last)
+  {
     if(x > temp->value && temp->next == last)
     {
-      temp->next = new Element{temp, last, x};
+      temp->next = newElem;
+      newElem->previous = temp;
+      newElem->next = last;
+      //delete newElem;
       return;
     }
 
-    if(x >= temp->value && x <= temp->next->value)
+    if(x > temp->value && x < temp->next->value)
     {
-      temp->next->previous = new Element{temp, temp->next, x};
-      temp->next = temp->next->previous;
-
+      temp->next->previous = newElem;
+      newElem->next = temp->next;
+      newElem->previous = temp;
+      temp->next = newElem;
+      //delete newElem;
       return;
     }
+
     temp = temp->next;
-  }while(temp != last);
+  }
 }
 
-void Sorted_List::delete(int key)
+void Sorted_List::print()
 {
-  
-}
-
-
-
-void Sorted_List::printall()
-{
-  printList.push_back(first->value);
-  printList.push_back(first->next->value);
-  printList.push_back(first->next->next->value);
-  printList.push_back(first->next->next->next->value);
-  printList.push_back(first->next->next->next->next->value);
-  printList.push_back(first->next->next->next->next->next->value);
-  printList.push_back(first->next->next->next->next->next->next->value);
-  printList.push_back(first->next->next->next->next->next->next->previous->value);
-  printList.push_back(first->next->next->next->next->next->next->previous->previous->value);
-  printList.push_back(first->next->next->next->next->next->next->previous->previous->previous->value);
-  printList.push_back(first->next->next->next->next->next->next->previous->previous->previous->previous->value);
-  printList.push_back(first->next->next->next->next->next->next->previous->previous->previous->previous->previous->value);
-  printList.push_back(first->next->next->next->next->next->next->previous->previous->previous->previous->previous->previous->value);
-
+  Element* temp{first};
+  while(temp != last)
+  {
+    std::cout << temp->value << '\n';
+    temp = temp->next;
+  }
 }
