@@ -18,7 +18,10 @@ using namespace std;
 TEST_CASE ("Default constructor")
 {
     Sorted_List empty_list;
-    //Sorted_List linked_list{2,5,7};
+    Sorted_List linked_list{2,5,7};
+    CHECK(linked_list.get_value() == 12);
+    
+
 }
 
 // the following line will halt the compilation process. Move it
